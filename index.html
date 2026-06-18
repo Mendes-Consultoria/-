@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="icon" type="image/png" href="./logo.png?v=2">
+<link rel="shortcut icon" type="image/png" href="./logo.png?v=2">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mendes Consultoria</title>
+
+  <style>
+    :root {
+      --bg: #030405;
+      --bg-soft: #081018;
+      --bg-navy: #0b1624;
+      --card: rgba(12, 15, 18, 0.94);
+      --card-2: rgba(18, 22, 27, 0.94);
+      --gold: #d8b42c;
+      --gold-2: #f3d13f;
+      --blue: #12304a;
+      --red: #d90429;
+      --text: #ffffff;
+      --muted: #b7b7b7;
+      --muted-2: #747474;
+      --line: rgba(255,255,255,0.10);
+      --shadow: 0 28px 90px rgba(0,0,0,0.52);
+      --radius: 26px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 80% 6%, rgba(216,180,44,0.18), transparent 26%),
+        radial-gradient(circle at 8% 12%, rgba(18,48,74,0.58), transparent 30%),
+        linear-gradient(180deg, #0b1624 0%, #061018 28%, #030405 68%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.026) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(3,4,5,0.88);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 250px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--gold-2), #94720a);
+      color: #050505;
+      display: grid;
+      place-items: center;
+      font-weight: 1000;
+      letter-spacing: -1px;
+      box-shadow: 0 0 26px rgba(216,180,44,0.25);
+    }
+
+    .brand-name {
+      font-weight: 1000;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      font-size: 16px;
+    }
+
+    .brand-sub {
+      color: var(--gold-2);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.26em;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      color: #a8a8a8;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a:hover { color: var(--gold-2); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 52px;
+      padding: 0 28px;
+      border-radius: 999px;
+      font-weight: 1000;
+      font-size: 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.2s ease;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .logo-img{
+    width:60px;
+    height:60px;
+    object-fit:contain;
+    border-radius:12px;
+}
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffe35b, #d2ab1d);
+      color: #050505;
+      box-shadow: 0 18px 45px rgba(216,180,44,0.18);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+    .btn-outline {
+      border-color: rgba(216,180,44,0.55);
+      color: var(--gold-2);
+      background: transparent;
+    }
+
+    .btn-outline:hover { background: rgba(216,180,44,0.10); }
+
+    .hero {
+      padding: 112px 0 76px;
+      text-align: center;
+      position: relative;
+    }
+
+    .eyebrow {
+      color: var(--gold-2);
+      font-size: 12px;
+      font-weight: 1000;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(46px, 7vw, 86px);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+      max-width: 1000px;
+      margin: 0 auto 28px;
+    }
+
+    .gold { color: var(--gold-2); }
+
+    .hero p {
+      color: #c2c2c2;
+      font-size: clamp(16px, 2vw, 20px);
+      max-width: 790px;
+      margin: 0 auto 38px;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stats {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.018);
+      padding: 22px 0;
+    }
+
+    .stats-inner {
+      display: flex;
+      justify-content: center;
+      gap: 42px;
+      flex-wrap: wrap;
+      color: #9d9d9d;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .stats-inner span strong { color: var(--gold-2); }
+
+    section { padding: 92px 0; position: relative; }
+
+    .section-head { margin-bottom: 44px; }
+    .center { text-align: center; }
+
+    .section-head h2 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+      margin-bottom: 18px;
+    }
+
+    .section-head p {
+      color: #aaa;
+      font-size: 17px;
+      max-width: 760px;
+    }
+
+    .center p { margin-inline: auto; }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card,
+    .plan,
+    .mfit-panel,
+    .testimonial,
+    .product-card,
+    .calc-card {
+      background: linear-gradient(180deg, rgba(18,22,27,0.96), rgba(7,8,10,0.98));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-card {
+      padding: 34px;
+      min-height: 250px;
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: rgba(216,180,44,0.12);
+      border: 1px solid rgba(216,180,44,0.34);
+      color: var(--gold-2);
+      margin-bottom: 28px;
+      font-weight: 1000;
+    }
+
+    .feature-card h3 { font-size: 20px; margin-bottom: 12px; letter-spacing: -0.03em; }
+    .feature-card p { color: #aaa; font-size: 15px; }
+
+    .process {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .steps { display: grid; gap: 28px; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+    }
+
+    .step-num {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      color: var(--gold);
+      display: grid;
+      place-items: center;
+      font-weight: 1000;
+    }
+
+    .step small {
+      color: var(--gold-2);
+      font-weight: 1000;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 10px;
+    }
+
+    .step h3 { margin: 7px 0 8px; font-size: 19px; }
+    .step p { color: #aaa; font-size: 15px; }
+
+    .mfit-panel {
+      padding: 34px;
+      overflow: hidden;
+      min-height: 450px;
+    }
+
+    .mfit-screen {
+      background: #f7f9fc;
+      color: #182236;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+    }
+
+    .mfit-top {
+      background: #263d58;
+      color: #fff;
+      padding: 22px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 1000;
+      letter-spacing: -0.03em;
+    }
+
+    .mfit-body { padding: 24px; display: grid; gap: 14px; }
+
+    .mfit-item {
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border: 1px solid #e8edf5;
+    }
+
+    .mfit-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #dff1ff;
+      color: #0d8de4;
+      display: grid;
+      place-items: center;
+      font-weight: 1000;
+      flex: none;
+    }
+
+    .mfit-item b { display: block; font-size: 16px; color: #182236; margin-bottom: 2px; }
+    .mfit-item span { color: #64748b; font-size: 13px; }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .plan {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan.featured {
+      border-color: rgba(216,180,44,0.62);
+      background: linear-gradient(180deg, rgba(31,31,31,0.98), rgba(9,9,9,0.98));
+      transform: translateY(-10px);
+    }
+
+    .tag {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--gold);
+      color: #050505;
+      padding: 10px 22px;
+      border-radius: 0 24px 0 16px;
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .tag-red { background: var(--red); color: #fff; }
+
+    .plan h3 { font-size: 24px; margin-bottom: 6px; }
+    .plan .sub { color: var(--gold-2); font-size: 13px; font-weight: 1000; margin-bottom: 26px; }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      margin-bottom: 26px;
+    }
+
+    .price small { color: #999; }
+    .price strong { font-size: 44px; line-height: 1; }
+
+    .plan p { color: #aaa; margin-bottom: 26px; min-height: 76px; }
+
+    .checks { display: grid; gap: 14px; margin-bottom: 34px; }
+
+    .checks li {
+      list-style: none;
+      color: #bdbdbd;
+      font-size: 15px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .checks li::before {
+      content: "✓";
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex: none;
+      color: var(--gold-2);
+      border: 1px solid rgba(216,180,44,0.45);
+      background: rgba(216,180,44,0.10);
+      font-size: 12px;
+      font-weight: 1000;
+    }
+
+    .calculator { max-width: 1040px; margin: 0 auto; }
+
+    .calc-card {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      overflow: hidden;
+      min-height: 620px;
+    }
+
+    .calc-form {
+      padding: 38px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .calc-results {
+      padding: 38px;
+      display: grid;
+      align-content: center;
+      text-align: center;
+      min-height: 620px;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(216,180,44,0.10), transparent 34%),
+        rgba(0,0,0,0.14);
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .field { display: grid; gap: 8px; }
+
+    label {
+      color: #aaa;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 1000;
+      letter-spacing: 0.14em;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 56px;
+      border-radius: 15px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      padding: 0 16px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    select option { color: #111; }
+
+    input:focus,
+    select:focus {
+      border-color: rgba(216,180,44,0.7);
+      box-shadow: 0 0 0 4px rgba(216,180,44,0.08);
+    }
+
+    .sex-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .sex-btn {
+      height: 56px;
+      border-radius: 15px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: #858585;
+      font-weight: 1000;
+      cursor: pointer;
+    }
+
+    .sex-btn.active {
+      border-color: rgba(216,180,44,0.74);
+      background: rgba(216,180,44,0.12);
+      color: var(--gold-2);
+    }
+
+    .profile-options {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+
+    .profile-option {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.035);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: left;
+      color: #bcbcbc;
+      cursor: pointer;
+      transition: 0.18s;
+    }
+
+    .profile-option b {
+      display: block;
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .profile-option span {
+      color: #8b8b8b;
+      font-size: 12px;
+    }
+
+    .profile-option.active {
+      border-color: rgba(216,180,44,0.72);
+      background: rgba(216,180,44,0.12);
+    }
+
+    .result-main {
+      font-size: clamp(58px, 8vw, 86px);
+      font-weight: 1000;
+      letter-spacing: -0.08em;
+      color: var(--gold-2);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .result-label {
+      color: #b8b8b8;
+      font-weight: 900;
+      margin-bottom: 28px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      width: 100%;
+      margin-top: 24px;
+    }
+
+    .result-box {
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      padding: 20px 12px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    .result-box strong {
+      color: #fff;
+      font-size: 24px;
+      display: block;
+      line-height: 1.1;
+    }
+
+    .result-box span {
+      display: block;
+      color: #858585;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .result-box.highlight strong { color: var(--gold-2); }
+
+    .formula-note {
+      color: #777;
+      font-size: 12px;
+      margin-top: 22px;
+      max-width: 390px;
+      margin-inline: auto;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card h3 {
+      font-size: 24px;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+
+    .product-card p {
+      color: #aaa;
+      font-size: 15px;
+      margin-bottom: 22px;
+      min-height: 78px;
+    }
+
+    .edit-note {
+      border: 1px dashed rgba(216,180,44,0.42);
+      background: rgba(216,180,44,0.07);
+      color: #cfcfcf;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial { padding: 30px; }
+    .stars { color: var(--gold-2); letter-spacing: 2px; margin-bottom: 18px; }
+    .testimonial h3 { font-size: 18px; margin-bottom: 12px; }
+    .testimonial p { color: #aaa; font-size: 15px; margin-bottom: 22px; }
+
+    footer {
+      padding: 70px 0 34px;
+      border-top: 1px solid var(--line);
+      background: rgba(0,0,0,0.42);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr 0.8fr 0.8fr;
+      gap: 40px;
+      margin-bottom: 54px;
+    }
+
+    .footer-grid h4 {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .footer-grid a,
+    .footer-grid p {
+      display: block;
+      color: #858585;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .footer-grid a:hover { color: var(--gold); }
+
+    .copyright {
+      border-top: 1px solid var(--line);
+      padding-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #656565;
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+
+      .grid-4,
+      .plans,
+      .products,
+      .testimonials,
+      .process,
+      .calc-card,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calc-form {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .plan.featured { transform: none; }
+    }
+
+  .product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  margin-bottom: 20px;
+}
+    
+    @media (max-width: 620px) {
+      .container { width: min(100% - 26px, var(--max)); }
+      .nav { height: 76px; }
+      .brand { min-width: unset; }
+      .brand-name { font-size: 13px; }
+      .brand-sub { font-size: 8px; }
+      .topbar .btn { display: none; }
+      .hero { padding: 78px 0 54px; }
+      .hero-actions { display: grid; }
+      .btn { width: 100%; }
+      section { padding: 66px 0; }
+
+      .field-grid,
+      .result-grid,
+      .sex-row {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card,
+      .plan,
+      .calc-form,
+      .calc-results,
+      .product-card {
+        padding: 26px;
+      }
+
+      h1 { font-size: 48px; }
+      .calc-card,
+      .calc-results { min-height: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 
+    INSTRUÇÕES RÁPIDAS:
+    1. Troque WHATSAPP_NUMERO pelo seu número com DDI e DDD. Exemplo: 5538999999999.
+    2. Para mudar frase de WhatsApp, edite o texto depois de ?text= em cada link.
+    3. Para adicionar produto, duplique um bloco .product-card e troque o título, descrição e link.
+    4. Link Instagram já configurado: https://www.instagram.com/suporte.mendesconsultoria/
+    5. Link do primeiro produto já configurado: https://pay.kiwify.com.br/8UBzIUN
+  -->
+
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#inicio" class="brand">
+        <img src="logo.png" class="logo-img">
+        <div>
+          <div class="brand-name">MENDES CONSULTORIA</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#inicio">Início</a>
+        <a href="#autoridade">Autoridade</a>
+        <a href="#mfit">MFIT</a>
+        <a href="#planos">Planos</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#produtos">Produtos</a>
+      </nav>
+
+      <a class="btn btn-primary" href="https://wa.me/5538998762506?text=Olá,%20vim%20pelo%20site%20da%20Mendes%20Consultoria%20e%20quero%20agendar%20minha%20avaliação." target="_blank">Agendar Avaliação</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="eyebrow">Consultoria Fitness Premium</div>
+        <h1>Mendes Consultoria para quem quer <span class="gold">resultado real</span>.</h1>
+        <p>Treino, estratégia e acompanhamento profissional para transformar seu físico com método, consistência e execução correta.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://wa.me/5538998762506?text=Olá,%20quero%20começar%20minha%20consultoria%20fitness%20com%20a%20Mendes%20Consultoria." target="_blank">Começar Consultoria</a>
+          <a class="btn btn-outline" href="#calculadora">Calcular minhas calorias</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="container stats-inner">
+        <span><strong>7+</strong> anos de experiência</span>
+        <span><strong>MFIT</strong> entrega dos treinos</span>
+        <span><strong>Online</strong> para todo Brasil</span>
+        <span><strong>Presencial</strong> em Janaúba/MG</span>
+      </div>
+    </div>
+
+    <section id="autoridade">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Autoridade</div>
+          <h2>Método validado por <span class="gold">execução, acompanhamento e consistência</span>.</h2>
+          <p>Não é protocolo genérico. A consultoria une avaliação, planejamento de treino, orientação estratégica e ajustes conforme sua evolução real.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="feature-card">
+            <div class="icon">01</div>
+            <h3>Avaliação estratégica</h3>
+            <p>Análise inicial feita por informações, rotina, fotos e vídeos enviados pelo aluno de forma profissional.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon">02</div>
+            <h3>Treino individualizado</h3>
+            <p>Programa ajustado ao seu objetivo, nível atual, disponibilidade, equipamentos e capacidade de recuperação.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon">03</div>
+            <h3>Entrega pelo MFIT</h3>
+            <p>O aluno recebe a ficha no aplicativo com organização, histórico, feedbacks e vídeos demonstrativos.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon">04</div>
+            <h3>Evolução mensurável</h3>
+            <p>Fotos, dados, frequência e execução ajudam a acompanhar o progresso com mais precisão.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona">
+      <div class="container">
+        <div class="section-head center">
+          <div class="eyebrow">Processo simples</div>
+          <h2>Como funciona a <span class="gold">consultoria</span></h2>
+          <p>Em poucos passos você recebe um planejamento completo e começa a executar com clareza.</p>
+        </div>
+
+        <div class="process">
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div>
+                <small>Passo 01</small>
+                <h3>Escolha seu plano</h3>
+                <p>Selecione o nível de acompanhamento ideal para seu objetivo, rotina e necessidade de suporte.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">2</div>
+              <div>
+                <small>Passo 02</small>
+                <h3>Faça a avaliação inicial</h3>
+                <p>Envie informações, fotos e vídeos para análise técnica. Na consultoria presencial, o atendimento ocorre em Janaúba/MG.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">3</div>
+              <div>
+                <small>Passo 03</small>
+                <h3>Receba sua ficha pelo MFIT</h3>
+                <p>Seu treino fica disponível no app com exercícios, séries, repetições, intervalos e vídeos explicativos.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">4</div>
+              <div>
+                <small>Passo 04</small>
+                <h3>Acompanhe sua evolução</h3>
+                <p>O progresso é monitorado por feedbacks, registros e atualizações conforme seu corpo responde.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mfit-panel">
+            <div class="mfit-screen">
+              <div class="mfit-top">MFIT PERSONAL</div>
+              <div class="mfit-body">
+                <div class="mfit-item">
+                  <div class="mfit-badge">▶</div>
+                  <div>
+                    <b>Vídeos explicativos</b>
+                    <span>Visualize a execução dos exercícios dentro do aplicativo.</span>
+                  </div>
+                </div>
+
+                <div class="mfit-item">
+                  <div class="mfit-badge">📈</div>
+                  <div>
+                    <b>Evolução do aluno</b>
+                    <span>Acompanhe registros, feedbacks e progresso do planejamento.</span>
+                  </div>
+                </div>
+
+                <div class="mfit-item">
+                  <div class="mfit-badge">📷</div>
+                  <div>
+                    <b>Fotos e comparativos</b>
+                    <span>Armazene imagens de evolução para comparação durante a consultoria.</span>
+                  </div>
+                </div>
+
+                <div class="mfit-item">
+                  <div class="mfit-badge">✓</div>
+                  <div>
+                    <b>Ficha organizada</b>
+                    <span>Treinos entregues com clareza, estrutura e acompanhamento profissional.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="mfit">
+      <div class="container">
+        <div class="section-head center">
+          <div class="eyebrow">Treine pelo MFIT</div>
+          <h2>Sua consultoria dentro do <span class="gold">aplicativo</span></h2>
+          <p>O MFIT concentra os treinos, vídeos demonstrativos, feedbacks e acompanhamento da evolução em um só lugar.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="feature-card">
+            <div class="icon">▶</div>
+            <h3>Exercícios em vídeo</h3>
+            <p>O aluno consegue visualizar como executar os movimentos com mais segurança.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon">📋</div>
+            <h3>Ficha de treino</h3>
+            <p>Treinos com séries, repetições, cargas, intervalos e observações importantes.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon">📷</div>
+            <h3>Fotos de evolução</h3>
+            <p>Registro visual para comparar progresso e ajustar a estratégia com mais precisão.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon">💬</div>
+            <h3>Feedbacks</h3>
+            <p>Acompanhamento para corrigir rota, melhorar execução e manter constância.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="planos">
+      <div class="container">
+        <div class="section-head center">
+          <div class="eyebrow">Consultoria</div>
+          <h2>Escolha seu <span class="gold">plano</span></h2>
+          <p>Do acompanhamento básico ao suporte completo. Os valores abaixo são editáveis no código.</p>
+        </div>
+
+        <div class="plans">
+          <div class="plan">
+            <h3>Essencial</h3>
+            <div class="sub">Comece com direção</div>
+            <div class="price"><small>R$</small><strong>100</strong><small>/mês</small></div>
+            <p>Ideal para quem precisa de treino personalizado e acompanhamento inicial.</p>
+            <ul class="checks">
+              <li>Treino personalizado pelo MFIT</li>
+              <li>Vídeos demonstrativos</li>
+              <li>Ajuste mensal do programa</li>
+              <li>Suporte por WhatsApp</li>
+            </ul>
+            <a class="btn btn-outline" href="https://wa.me/38998762506?text=Olá,%20tenho%20interesse%20no%20Plano%20Essencial%20da%20Mendes%20Consultoria.%20Pode%20me%20explicar%20como%20funciona?" target="_blank">Quero esse plano</a>
+          </div>
+
+          <div class="plan featured">
+            <div class="tag">Mais popular</div>
+            <h3>Evolução</h3>
+            <div class="sub">Acelere seus resultados</div>
+            <div class="price"><small>R$</small><strong>150</strong><small>/mês</small></div>
+            <p>Treino, estratégia e ajustes com melhor equilíbrio entre preço e acompanhamento.</p>
+            <ul class="checks">
+              <li>Treino personalizado pelo MFIT</li>
+              <li>Avaliação inicial por fotos e vídeos</li>
+              <li>Ajustes quinzenais</li>
+              <li>Feedbacks e acompanhamento</li>
+              <li>Comparativo de evolução</li>
+            </ul>
+            <a class="btn btn-primary" href="https://wa.me/5538998762506?text=Olá,%20quero%20saber%20mais%20sobre%20o%20Plano%20Evolução.%20Vi%20no%20site%20e%20tenho%20interesse%20em%20começar." target="_blank">Quero esse plano</a>
+          </div>
+
+          <div class="plan">
+            <div class="tag tag-red">Vagas limitadas</div>
+            <h3>Premium</h3>
+            <div class="sub">Performance máxima</div>
+            <div class="price"><small>R$</small><strong>250</strong><small>/mês</small></div>
+            <p>Para quem quer suporte mais próximo, ajustes frequentes e máxima prioridade.</p>
+            <ul class="checks">
+              <li>Treino personalizado pelo MFIT</li>
+              <li>Acompanhamento completo</li>
+              <li>Ajustes semanais</li>
+              <li>Suporte prioritário</li>
+              <li>Análise de evolução detalhada</li>
+              <li>Consultoria presencial em Janaúba/MG</li>
+            </ul>
+            <a class="btn btn-outline" href="https://wa.me/5538998762506?text=Olá,%20quero%20entrar%20no%20Plano%20Premium%20da%20Mendes%20Consultoria.%20Ainda%20tem%20vaga%20disponível?" target="_blank">Quero esse plano</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculadora">
+      <div class="container calculator">
+        <div class="section-head center">
+          <div class="eyebrow">Ferramenta gratuita</div>
+          <h2>Calculadora de <span class="gold">Calorias</span></h2>
+          <p>Escolha o perfil que mais se aproxima do aluno. O cálculo usa fórmulas diferentes para deixar a estimativa mais coerente com o objetivo.</p>
+        </div>
+
+        <div class="calc-card">
+          <div class="calc-form">
+            <label>Sexo</label>
+            <div class="sex-row">
+              <button class="sex-btn active" type="button" id="sex-m">Masculino</button>
+              <button class="sex-btn" type="button" id="sex-f">Feminino</button>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label>Idade</label>
+                <input id="idade" type="number" placeholder="25">
+              </div>
+              <div class="field">
+                <label>Peso kg</label>
+                <input id="peso" type="number" placeholder="75">
+              </div>
+              <div class="field">
+                <label>Altura cm</label>
+                <input id="altura" type="number" placeholder="175">
+              </div>
+            </div>
+
+            <label>Qual condicionamento físico mais se assemelha ao atual?</label>
+            <div class="profile-options">
+              <button type="button" class="profile-option" data-profile="baixo">
+                <b>Abaixo do Peso Ideal</b>
+                <span>Harris-Benedict | útil para estimativa em fase de ganho de peso.</span>
+              </button>
+
+              <button type="button" class="profile-option active" data-profile="ideal">
+                <b>Próximo do Peso Ideal</b>
+                <span>Harris-Benedict | boa opção para manutenção, recomposição e ajustes moderados.</span>
+              </button>
+
+              <button type="button" class="profile-option" data-profile="alto">
+                <b>Muito acima do Peso</b>
+                <span>Mifflin-St Jeor | costuma ser mais conservadora para excesso de peso.</span>
+              </button>
+
+              <button type="button" class="profile-option" data-profile="atleta">
+                <b>Atleta</b>
+                <span>Tinsley | opção mais específica para perfil treinado.</span>
+              </button>
+            </div>
+
+            <div class="field" style="margin-bottom:18px;">
+              <label>Nível de atividade</label>
+              <select id="atividade">
+                <option value="1.2">Sedentário — pouco ou nenhum exercício</option>
+                <option value="1.375">Levemente ativo — 1 a 3x por semana</option>
+                <option value="1.55" selected>Moderadamente ativo — 3 a 5x por semana</option>
+                <option value="1.725">Muito ativo — 6 a 7x por semana</option>
+                <option value="1.9">Extremamente ativo — treino intenso 2x ao dia</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" style="width:100%;" type="button" onclick="calcularCalorias()">Calcular Gasto Calórico</button>
+          </div>
+
+          <div class="calc-results">
+            <div>
+              <div class="result-main" id="manutencao">—</div>
+              <div class="result-label">Calorias para manutenção / kcal por dia</div>
+
+              <div class="result-grid">
+                <div class="result-box">
+                  <strong id="tmb">—</strong>
+                  <span>TMB estimada</span>
+                </div>
+                <div class="result-box highlight">
+                  <strong id="perder">—</strong>
+                  <span>Para perder peso</span>
+                </div>
+                <div class="result-box highlight">
+                  <strong id="ganhar">—</strong>
+                  <span>Para ganhar peso</span>
+                </div>
+                <div class="result-box">
+                  <strong id="formula">—</strong>
+                  <span>Fórmula usada</span>
+                </div>
+              </div>
+
+              <p class="formula-note">Esses valores são estimativas. Um plano real precisa considerar adesão, histórico, rotina, treino, sono, resposta corporal e evolução semanal.</p>
+
+              <a class="btn btn-primary" style="margin-top:24px;" href="https://wa.me/5538998762506?text=Olá,%20calculei%20minhas%20calorias%20no%20site%20e%20quero%20um%20plano%20personalizado%20para%20meu%20objetivo." target="_blank">
+                Pronto para um plano personalizado? Clique aqui
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos">
+      <div class="container">
+        <div class="section-head center">
+          <div class="eyebrow">Produtos digitais</div>
+          <h2>Protocolos e materiais para <span class="gold">evoluir melhor</span></h2>
+         </div>
+
+        <div class="products">
+          <div class="product-card">
+            <img src="adeus.png" alt="Hipertrofia">
+            <h3>Adeus Efeito Sanfona</h3>
+            <p>Produto inicial da Mendes Consultoria. Ideal para quem quer entender emagrecimento com mais estratégia e menos tentativa aleatória.</p>
+          <!--  <div class="edit-note">Para editar: troque o título, descrição e o link do botão abaixo pelo checkout do produto.</div> -->
+            <a class="btn btn-primary" href="https://pay.kiwify.com.br/8UBzIUN" target="_blank">Compre aqui</a>
+          </div>
+
+         <!--  <div class="product-card">
+            <div class="icon">02</div>
+            <h3>Adicionar novo produto</h3>
+            <p>Cole aqui a descrição do próximo e-book, protocolo, planilha ou material digital que você quiser vender.</p>
+            <div class="edit-note">Cole aqui seu link de afiliado ou checkout. Exemplo: substitua o # do botão por seu link da Kiwify.</div>
+            <a class="btn btn-outline" href="#" target="_blank">Cole seu link aqui</a>
+          </div>
+
+          <div class="product-card">
+            <div class="icon">03</div>
+            <h3>Adicionar novo produto</h3>
+            <p>Use este espaço para publicar outro produto no futuro, como dieta, treino em casa, hipertrofia ou protocolo de definição.</p>
+            <div class="edit-note">Duplique este bloco no código para criar quantos produtos quiser.</div>
+            <a class="btn btn-outline" href="#" target="_blank">Cole seu link aqui</a>
+          -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="depoimentos">
+      <div class="container">
+        <div class="section-head center">
+          <div class="eyebrow">Resultados</div>
+          <h2>Histórias de <span class="gold">transformação</span></h2>
+          <p>Use esta seção apenas com depoimentos reais. Os textos abaixo são exemplos editáveis.</p>
+        </div>
+
+        <div class="testimonials">
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <h3>Mais constância nos treinos</h3>
+            <p>“Finalmente consegui seguir uma rotina organizada e adaptada para minha vida real.”</p>
+            <strong>Aluno Mendes Consultoria</strong>
+          </div>
+
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <h3>Treino mais claro</h3>
+            <p>“Os vídeos e a ficha no aplicativo facilitaram muito a execução dos exercícios.”</p>
+            <strong>Aluno Mendes Consultoria</strong>
+          </div>
+
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <h3>Evolução visível</h3>
+            <p>“Com acompanhamento e ajustes, consegui visualizar melhor meu progresso.”</p>
+            <strong>Aluno Mendes Consultoria</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#inicio" class="brand" style="margin-bottom:22px;">
+            <img src="logo.png" class="logo-img">
+            <div>
+              <div class="brand-name">MENDES CONSULTORIA</div>
+            </div>
+          </a>
+          <p>Consultoria fitness online e presencial em Janaúba/MG para quem quer resultado com método, execução e acompanhamento.</p>
+        </div>
+
+        <div>
+          <h4>Serviços</h4>
+          <a href="#planos">Plano Essencial</a>
+          <a href="#planos">Plano Evolução</a>
+          <a href="#planos">Plano Premium</a>
+          <a href="#mfit">Treinos pelo MFIT</a>
+        </div>
+
+        <div>
+          <h4>Produtos</h4>
+          <a href="https://pay.kiwify.com.br/8UBzIUN" target="_blank">Adeus Efeito Sanfona</a>
+          <a href="#produtos">Adicionar novo produto</a>
+          <a href="#calculadora">Calculadora</a>
+        </div>
+
+        <div>
+          <h4>Redes e contato</h4>
+          <a href="https://www.instagram.com/suporte.mendesconsultoria/" target="_blank">Instagram</a>
+          <a href="https://wa.me/5538998762506?text=Olá,%20vim%20pelo%20site%20da%20Mendes%20Consultoria%20e%20quero%20tirar%20uma%20dúvida." target="_blank">WhatsApp</a>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#depoimentos">Depoimentos</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <span>© 2026 Mendes Consultoria. Todos os direitos reservados.</span>
+        <span>Política de Privacidade · Termos de Uso</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let sexo = "M";
+    let perfil = "ideal";
+
+    const sexM = document.getElementById("sex-m");
+    const sexF = document.getElementById("sex-f");
+
+    sexM.addEventListener("click", function () {
+      sexo = "M";
+      sexM.classList.add("active");
+      sexF.classList.remove("active");
+      calcularCalorias();
+    });
+
+    sexF.addEventListener("click", function () {
+      sexo = "F";
+      sexF.classList.add("active");
+      sexM.classList.remove("active");
+      calcularCalorias();
+    });
+
+    document.querySelectorAll(".profile-option").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        document.querySelectorAll(".profile-option").forEach(function(item) {
+          item.classList.remove("active");
+        });
+        btn.classList.add("active");
+        perfil = btn.dataset.profile;
+        calcularCalorias();
+      });
+    });
+
+    function calcularTMB(idade, peso, altura) {
+      let tmb = 0;
+      let formulaNome = "";
+
+      if (perfil === "alto") {
+        formulaNome = "Mifflin-St Jeor";
+        if (sexo === "M") {
+          tmb = (10 * peso) + (6.25 * altura) - (5 * idade) + 5;
+        } else {
+          tmb = (10 * peso) + (6.25 * altura) - (5 * idade) - 161;
+        }
+      } else if (perfil === "atleta") {
+        formulaNome = "Tinsley";
+        if (sexo === "M") {
+          tmb = (24.8 * peso) + 10;
+        } else {
+          tmb = (22 * peso) + 10;
+        }
+      } else {
+        formulaNome = "Harris-Benedict";
+        if (sexo === "M") {
+          tmb = 88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * idade);
+        } else {
+          tmb = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * idade);
+        }
+      }
+
+      return { tmb, formulaNome };
+    }
+
+    function calcularCalorias() {
+      const idade = parseFloat(document.getElementById("idade").value);
+      const peso = parseFloat(document.getElementById("peso").value);
+      const altura = parseFloat(document.getElementById("altura").value);
+      const atividade = parseFloat(document.getElementById("atividade").value);
+
+      if (!idade || !peso || !altura || idade <= 0 || peso <= 0 || altura <= 0) {
+        document.getElementById("manutencao").textContent = "—";
+        document.getElementById("tmb").textContent = "—";
+        document.getElementById("perder").textContent = "—";
+        document.getElementById("ganhar").textContent = "—";
+        document.getElementById("formula").textContent = "—";
+        return;
+      }
+
+      const resultado = calcularTMB(idade, peso, altura);
+      const tmb = resultado.tmb;
+      const manutencao = tmb * atividade;
+
+      let deficit = manutencao - 400;
+      let superavit = manutencao + 300;
+
+      if (perfil === "baixo") {
+        deficit = manutencao - 250;
+        superavit = manutencao + 400;
+      }
+
+      if (perfil === "alto") {
+        deficit = manutencao - 500;
+        superavit = manutencao + 200;
+      }
+
+      if (perfil === "atleta") {
+        deficit = manutencao - 350;
+        superavit = manutencao + 300;
+      }
+
+      document.getElementById("manutencao").textContent = Math.round(manutencao).toLocaleString("pt-BR");
+      document.getElementById("tmb").textContent = Math.round(tmb).toLocaleString("pt-BR");
+      document.getElementById("perder").textContent = Math.round(deficit).toLocaleString("pt-BR");
+      document.getElementById("ganhar").textContent = Math.round(superavit).toLocaleString("pt-BR");
+      document.getElementById("formula").textContent = resultado.formulaNome;
+    }
+
+    ["idade", "peso", "altura", "atividade"].forEach(function(id) {
+      document.getElementById(id).addEventListener("input", calcularCalorias);
+      document.getElementById(id).addEventListener("change", calcularCalorias);
+    });
+  </script>
+</body>
+</html>
